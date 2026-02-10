@@ -127,17 +127,31 @@ Coverage:
 
 Note: FakeStore API does not provide a cart endpoint — "add to cart" is represented by validating the selected product.
 
-#### User Story 2
+### User Story 2  
 
-As a store manager, add three new clothing items to the catalogue.
+**As a store manager, I want to add three new clothing items to the product catalogue.**
 
-Coverage:
+This user story is covered by two complementary tests to balance acceptance criteria with the limitations of the FakeStore API.
 
-- Add products (POST /products)
-- Assert successful creation
-- Verify products appear in the catalogue (GET /products)
+#### userStory2HappyPath.spec.ts
+Covers the **stable happy path** for product creation:
+- Creates a single product using `POST /products`
+- Validates a successful response
+- Asserts that an ID is generated and core fields (title, price) are returned correctly
 
-Note: Duplicate-rejection behavior may not be enforced by the FakeStore API and is documented accordingly.
+This test demonstrates correct request construction, response validation, and API interaction without relying on API persistence.
+
+#### userStory2.spec.ts
+Focuses on the **full acceptance criteria**:
+- Attempts to add multiple products
+- Asserts expected uniqueness of product identifiers
+- Verifies product visibility via `GET /products`
+- Explicitly documents cases where the FakeStore API does not enforce uniqueness or persistence
+
+Rather than weakening assertions to force passing tests, this approach documents expected business behaviour and highlights known API limitations.
+
+> **Note:** FakeStore API is a demo API and does not consistently enforce uniqueness or persist created products.  
+> Tests reflect the acceptance criteria and explicitly document this gap where applicable.
 
 #### User Story 3
 
@@ -166,4 +180,6 @@ Known API limitation: FakeStore API may not persist deletions; tests document th
 
 ### Notes for Reviewers
 
-This solution prioritizes clarity, maintainability, and business intent within the scope of the exercise. I'm happy to walk through design decisions, tradeoffs, and improvements during the interview.
+Playwright tracing is used during local debugging to visually inspect API requests, payloads, responses, and status codes without adding logging to test code.
+
+This solution prioritises clarity, maintainability, and business intent within the scope of the exercise. I am happy to walk through design decisions, tradeoffs, and improvements during the interview.
