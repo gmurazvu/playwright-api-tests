@@ -39,46 +39,29 @@ The focus of this solution is on:
 ```text
 
 playwright-api-tests/
-
 ├── tests/
-
 │   ├── userStory1.spec.ts
-
 │   ├── userStory2.spec.ts
-
+│   ├── userStory2HappyPath.spec.ts
 │   └── userStory3.spec.ts
-
 │
-
 ├── src/
-
 │   ├── api/
-
 │   │   ├── baseApiClient.ts
-
 │   │   └── productsApi.ts
-
 │   │
-
 │   ├── models/
-
 │   │   └── product.ts
-
 │   │
-
 │   └── utils/
-
 │       └── productHelpers.ts
-
 │
-
 ├── playwright.config.ts
-
 ├── package.json
-
 └── README.md
 
-Setup Instructions
+userStory2HappyPath.spec.ts contains a stable “happy path” test for product creation, while userStory2.spec.ts focuses on acceptance criteria and documented API limitations.
+
 ## Setup Instructions
 
 ### Prerequisites
